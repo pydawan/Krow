@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.8.2"/>
+<link rel="icon" href="https://javaeden.github.io/Krow/">
+
+<meta name="robots" content="nofollow">
+
+<title>Krow</title>
+<meta name="description" content="Simple yet powerful logging and string formatting for Java">
+
+
+<script>
+    window.site = {"orchidVersion":"0.8.2","baseUrl":"https://javaeden.github.io/Krow","environment":"debug","version":"0.1.2"};
+</script>
+
+<!-- start:inject styles -->
+            <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css"/>
+            <link rel="stylesheet" type="text/css" href="https://javaeden.github.io/Krow/BsDoc/cf40ce90/assets/css/bsdoc.css"/>
+            <link rel="stylesheet" type="text/css" href="https://rawgit.com/PrismJS/prism-themes/master/themes/prism-darcula.css"/>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css"/>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-highlight/prism-line-highlight.min.css"/>
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css"/>
+    <!-- end:inject styles --></head>
+<body>
+
+<a class="github-fork-ribbon left-top"
+   href="https://github.com/JavaEden/Krow"
+   title="Fork me on GitHub">Fork me on GitHub</a>
+
+<header class="navbar navbar-fixed-top bs-docs-nav">
+    <div class="container">
+        <div class="navbar-header" role="banner">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://javaeden.github.io/Krow">Krow</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                                                            <li><a href="https://javaeden.github.io/Krow">Home</a></li>
+                                                                                <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Wiki<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu">
+                                                            </ul>
+                        </li>
+                                                </ul>
+        </nav>
+    </div>
+</header>
+<div id="top"></div>
+
+    <div class="bs-docs-masthead" id="jumbotron">
+        <div class="container">
+            <h1 class="home-title">Krow</h1>
+            <p class="lead">Simple yet powerful logging and string formatting for Java</p>
+                            <p class="lead">
+                    <a href="https://github.com/JavaEden/Krow"
+                       class="btn btn-outline-inverse btn-lg">Download</a>
+                </p>
+                                        <p class="version">Currently 0.1.2</p>
+                    </div>
+    </div>
+<div class="container bs-docs-container">
+    <div class="row">
+        <div class="col-md-9" role="main">
+        
+                                <!-- start:inject components -->
+                                                                                                                                                                                                                                        <div class="component component-readme component-order-0">
+                            <h1 id="krow">Krow</h1>
+<p>A small library for generating tables in ASCII or HTML formats, built with Kotlin's type-safe builders</p>
+<h3 id="building-tables">Building Tables</h3>
+<p>Tables are built with Kotlin's type-safe builder syntax. You open a <code>krow</code> closure, and are then able to call the
+various methods and set properties that build your table. A complete example is shown below:</p>
+<pre><code class="language-kotlin">val table = krow {
+    cell(&quot;col1&quot;, &quot;row1&quot;) { content = &quot;1-1&quot; }
+    cell(&quot;col1&quot;, &quot;row2&quot;) { content = &quot;1-2&quot; }
+
+    cell(&quot;col2&quot;, &quot;row1&quot;) { content = &quot;2-1&quot; }
+    cell(&quot;col2&quot;, &quot;row2&quot;) { content = &quot;2-2&quot; }
+
+    cell(&quot;col3&quot;, &quot;row1&quot;) { content = &quot;3-1&quot; }
+    cell(&quot;col3&quot;, &quot;row2&quot;) { content = &quot;3-2&quot; }
+
+    table {
+        wrapTextAt = 30
+        horizontalAlignment = HorizontalAlignment.CENTER
+        verticalAlignment = VerticalAlignment.TOP
+    }
+}
+</code></pre>
+<p>A Table is build of Cells arranged in a 2D grid.</p>
+<p>The <code>cell()</code> method accepts a pair of keys for <code>column, row</code> index. If either of these two keys do not exist, then the
+table will add a row or column accordingly, and then set the properties of that cell with the closure opened at that
+cell.</p>
+<p>The <code>row()</code> method takes a key for a row, and applies the closure to all cells in that row. If the row does not exist,
+the table will add the row before applying the closure to all its cells. In the same way, you can use the <code>column()</code> to
+setup an entire column of cells.</p>
+<p>the <code>table()</code> method applies the closure to every cell in the entire table.</p>
+<p>You can also set the ordering of rows and columns with the <code>columns()</code>, and <code>rows()</code> methods, which each take a list of
+Strings as the names of the columns or rows to add. Other rows or columns may be added later with the above methods, but
+they will be added at the end or added in place if the column or row already exists. At this time, it is not possible to
+reorder columns or rows once they have been created, so if you need a specific order, set it before configuring any
+individual cells, columns, or rows.</p>
+<h3 id="formatting-tables">Formatting Tables</h3>
+<p>Once a Table has been created like so:</p>
+<pre><code class="language-kotlin">val table = krow {
+    ...
+}
+</code></pre>
+<p>You can then print the Table in any format you wish. Krow ships with Formatters that render the table as an HTML table,
+or as an ASCII table for the command-line. Examples are shown below:</p>
+<p><strong>SingleBorder AsciiTable</strong></p>
+<pre><code>┌──────┬──────┬──────┬──────┐
+│      │ col1 │ col2 │ col3 │
+├──────┼──────┼──────┼──────┤
+│ row1 │ 1-1  │ 2-1  │ 3-1  │
+├──────┼──────┼──────┼──────┤
+│ row2 │ 1-2  │ 2-2  │ 3-2  │
+└──────┴──────┴──────┴──────┘
+</code></pre>
+<p><strong>DoubleBorder AsciiTable</strong></p>
+<pre><code>╔══════╦══════╦══════╦══════╗
+║      ║ col1 ║ col2 ║ col3 ║
+╠══════╬══════╬══════╬══════╣
+║ row1 ║ 1-1  ║ 2-1  ║ 3-1  ║
+╠══════╬══════╬══════╬══════╣
+║ row2 ║ 1-2  ║ 2-2  ║ 3-2  ║
+╚══════╩══════╩══════╩══════╝
+</code></pre>
+<p><strong>Crossing AsciiTable</strong></p>
+<pre><code>+------+------+------+------+
+|      | col1 | col2 | col3 |
++------+------+------+------+
+| row1 | 1-1  | 2-1  | 3-1  |
++------+------+------+------+
+| row2 | 1-2  | 2-2  | 3-2  |
++------+------+------+------+
+</code></pre>
+<p><strong>HtmlTable</strong></p>
+<pre><code>&lt;table&gt;
+  &lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th&gt;col1&lt;/th&gt;
+    &lt;th&gt;col2&lt;/th&gt;
+    &lt;th&gt;col3&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;row1&lt;/td&gt;
+    &lt;td&gt;1-1&lt;/td&gt;
+    &lt;td&gt;2-1&lt;/td&gt;
+    &lt;td&gt;3-1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;row2&lt;/td&gt;
+    &lt;td&gt;1-2&lt;/td&gt;
+    &lt;td&gt;2-2&lt;/td&gt;
+    &lt;td&gt;3-2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+                        </div>
+                                                                                                                                <div class="component component-license component-order-0">
+                            <pre><p>MIT License</p>
+<p>Copyright (c) 2018 JavaEden</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</p>
+</pre>
+                        </div>
+                                                                                                                                                                                                <!-- end:inject components -->
+                </div>
+
+        <!-- Page navigation
+        =========================================== -->
+        <div class="col-md-3" role="complementary">
+        <div class="bs-docs-sidebar hidden-print" id="bs-docs-sidebar">
+    
+    <ul class="nav bs-docs-sidenav">
+            </ul>
+
+        <!-- start:inject components -->
+        <!-- end:inject components -->
+
+    <a class="back-to-top" href="#top">
+        <i class="glyphicon glyphicon-chevron-up"></i> Back to top
+    </a>
+</div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="container bs-docs-container">
+    <footer class="bs-docs-footer" role="contentinfo">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav aria-label="navigateClasses">
+                <ul class="pager">
+                    
+                                    </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="icons">
+                <a href="https://github.com/JavaEden/Krow" class="fa fa-github"></a>
+            </div>
+    <br>
+    <p>
+    Documentation template based on the
+    <a href="https://github.com/mistic100/jekyll-bootstrap-doc">Jekyll Bootstrap Doc</a>
+    Jekyll theme by the <a href="http://getbootstrap.com">Bootstrap team</a>. Site created with
+    <a href="https://orchid.netlify.com">Orchid</a>.
+</p>
+<ul class="bs-docs-footer-links muted">
+    <li>Currently 0.1.2</li>
+</ul>
+</footer>    </div>
+</div>
+
+<!-- start:inject scripts -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.3.0/bootbox.min.js"></script>
+            <script src="https://javaeden.github.io/Krow/BsDoc/cf40ce90/assets/js/bsdoc.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-java.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-groovy.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-highlight/prism-line-highlight.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/show-language/prism-show-language.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <!-- end:inject scripts -->    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/1.2.0/trianglify.min.js"></script>
+<script>
+    $(function () {
+        window.colors = ['#2c2c2c', '#ff730f'];
+                      trianglify({});
+        buildNav();
+    });
+</script>
+</body>
+</html>
